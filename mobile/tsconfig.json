@@ -1,0 +1,27 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@atoms/*": ["./src/atomic/atoms/*"],
+      "@molecules/*": ["./src/atomic/molecules/*"],
+      "@organisms/*": ["./src/atomic/organisms/*"],
+      "@store/*": ["./src/store/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@templates/*": ["./src/templates/*"],
+      "@models/*": ["./src/models/*"],
+      "@generators/*": ["./src/generators/*"]
+    }
+  },
+
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "jest.config.js"
+  ]
+}

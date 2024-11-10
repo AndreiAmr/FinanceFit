@@ -1,0 +1,28 @@
+scalar JSON
+scalar Bigint
+
+type Query {
+  helloWorld: String
+}
+
+type Mutation {
+  login(email: String!, password: String!): ILoginResponse
+  signup(name: String!, email: String!, password: String!): Boolean
+}
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  password: String
+}
+
+type ILoginResponse {
+  data: User
+}
+
+input ISignupDTO {
+  name: String!
+  email: String!
+  password: String!
+}
