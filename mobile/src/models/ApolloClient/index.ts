@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://d6e2-177-152-87-204.ngrok-free.app',
+    uri: 'https://ab79-177-152-87-182.ngrok-free.app',
   }),
   cache: new InMemoryCache(),
 });

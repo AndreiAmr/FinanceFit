@@ -2,6 +2,7 @@ import { GenericButton } from '../../../../models/GenericButton';
 import { GenericError } from '../../../../models/GenericError';
 import { IUserRepository } from '../../../../repositories/user/user.repository';
 import { SignupDTO } from '../../../../types/Authentication/signup.types';
+import bcrypt from 'bcrypt';
 
 export interface ISignupService {
   (props: SignupDTO): Promise<boolean>;
@@ -23,7 +24,20 @@ class SignupServiceFactory {
       });
     }
 
-    const userCreated = await this.userRepository.createUser(props);
+    const salt = process.env.CRYPTO_SALT;
+
+    if (!salt) {
+      throw new GenericError({
+        title: 'Salt not found in .env file',
+      });
+    }
+
+    const hashedPasword = await bcrypt.hash(props.password, Number(salt));
+
+    const userCreated = await this.userRepository.createUser({
+      ...props,
+      password: hashedPasword,
+    });
 
     return !!userCreated;
   }

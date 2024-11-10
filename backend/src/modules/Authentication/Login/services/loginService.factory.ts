@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { GenericButton } from '../../../../models/GenericButton';
 import { GenericError } from '../../../../models/GenericError';
 import { IUserRepository } from '../../../../repositories/user/user.repository';
@@ -18,17 +19,17 @@ export class LoginServiceFactory implements ILoginService {
       throw new GenericError({
         title: 'Usuário não encontrado.',
         message: 'Verifique seus dados e tente novamente.',
-        firstButton: new GenericButton('Tentar novamente', 'Auth'),
+        firstButton: new GenericButton('Tentar novamente', 'Login'),
       });
     }
 
-    const isPasswordCorrect = user.password === password;
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
       throw new GenericError({
         title: 'Senha incorreta.',
         message: 'Verifique sua senha e tente novamente.',
-        firstButton: new GenericButton('Tentar novamente', 'Auth'),
+        firstButton: new GenericButton('Tentar novamente', 'Login'),
       });
     }
 

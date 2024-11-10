@@ -1,6 +1,7 @@
 export enum RoutesEnum {
-  Auth = 'Auth',
+  Login = 'Login',
+  Signup = 'Signup',
   Home = 'Home',
-  GenericLoader = 'GenericLoaderScreen',
-  GenericError = 'GenericErrorScreen',
+  LoadingScreen = 'LoadingScreen',
+  ErrorScreen = 'ErrorScreen',
 }

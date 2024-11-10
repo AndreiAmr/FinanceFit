@@ -1,33 +1,21 @@
-import React from 'react';
+import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AuthenticationRoutes from './Authentication';
-
-import { GenericLoadScreen } from '../screens/GenericLoad';
+import { Login } from '../screens/Auth/Login';
+import { LoadingScreen } from '../screens/LoadingScreen';
 import { RoutesEnum } from './types';
-import { HomeTemplate } from '../templates/App/Home';
-import { GenericErrorScreen } from '../screens/GenericError';
+import { ErrorScreen } from '../screens/Error';
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Login,
+    LoadingScreen,
+    ErrorScreen,
+  },
+  screenOptions: {
+    headerShown: false,
+  },
 
-const Routes = () => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-      initialRouteName="Auth">
-      <Stack.Screen name={RoutesEnum.Auth} component={AuthenticationRoutes} />
-      <Stack.Screen name={RoutesEnum.Home} component={HomeTemplate} />
-      <Stack.Screen
-        name={RoutesEnum.GenericLoader}
-        component={GenericLoadScreen}
-      />
-      <Stack.Screen
-        name={RoutesEnum.GenericError}
-        component={GenericErrorScreen}
-      />
-    </Stack.Navigator>
-  );
-};
+  initialRouteName: RoutesEnum.Login,
+});
 
-export default Routes;
+export const Routes = createStaticNavigation(RootStack);

@@ -1,15 +1,15 @@
 import { GenericButton } from '../GenericButton';
 
 interface IGenericError {
-  message: string;
+  message?: string;
   title: string;
-  firstButton: GenericButton;
+  firstButton?: GenericButton;
 }
 
 export class GenericError extends Error {
   title: string;
   description?: string;
-  firstButton: GenericButton;
+  firstButton?: GenericButton;
 
   constructor(props: IGenericError) {
     super(props.message);

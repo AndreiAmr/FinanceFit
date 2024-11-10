@@ -15,8 +15,10 @@ export function* getLoginAsync(props: ILoginRequestAction) {
     yield put(loginActions.setIsErrorLogin(false));
 
     yield call(navigate, {
-      routeName: RoutesEnum.GenericLoader,
+      routeName: RoutesEnum.LoadingScreen,
     });
+
+    console.log({ email, password });
 
     const login: ILogin = yield call(loginRepository.getLogin, {
       email,
@@ -33,7 +35,7 @@ export function* getLoginAsync(props: ILoginRequestAction) {
     const errorFormatted = error.graphQLErrors[0];
 
     yield call(resetNavigation, {
-      routeName: RoutesEnum.GenericError,
+      routeName: RoutesEnum.ErrorScreen,
       params: {
         title: errorFormatted.title,
         description: errorFormatted.message,
